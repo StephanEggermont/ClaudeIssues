@@ -3,7 +3,8 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'root',
-		'issues'
+		'issues',
+		'labels'
 	],
 	#category : 'ClaudeIssues-Model',
 	#package : 'ClaudeIssues',
@@ -12,12 +13,28 @@ Class {
 
 { #category : 'as yet unclassified' }
 ClIssueModel >> initialize [
-	issues := OrderedCollection new
+	issues := OrderedCollection new.
+	labels := Dictionary new.
 ]
 
 { #category : 'accessing' }
 ClIssueModel >> issues [
 	^issues
+]
+
+{ #category : 'accessing' }
+ClIssueModel >> issues: anObject [
+	issues := anObject
+]
+
+{ #category : 'accessing' }
+ClIssueModel >> labels [
+	^ labels
+]
+
+{ #category : 'accessing' }
+ClIssueModel >> labels: anObject [
+	labels := anObject
 ]
 
 { #category : 'accessing' }
@@ -34,8 +51,16 @@ ClIssueModel >> read [
 			title: (rawIssue at: #title);
 			data: rawIssue;
 			yourself.
+		(rawIssue at: #labels) do: [:label |
+			 labels at: (label at: #name) ifAbsentPut: [label].
+			 issue addLabel: (labels at: (label at: #name))].
 		self issues add: issue].
 	
+]
+
+{ #category : 'accessing' }
+ClIssueModel >> root [
+	^ root
 ]
 
 { #category : 'accessing' }
