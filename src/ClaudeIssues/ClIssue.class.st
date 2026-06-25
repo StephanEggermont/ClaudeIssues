@@ -50,6 +50,11 @@ ClIssue >> createdAt: aZTimestamp [
 	createdAt:= aZTimestamp
 ]
 
+{ #category : 'as yet unclassified' }
+ClIssue >> creationYearMonth [
+	^(createdAt year *100) + createdAt month
+]
+
 { #category : 'accessing' }
 ClIssue >> data [
 	^ data
@@ -84,6 +89,14 @@ ClIssue >> number [
 { #category : 'accessing' }
 ClIssue >> number: aNumber [
 	number := aNumber
+]
+
+{ #category : 'as yet unclassified' }
+ClIssue >> resolutionTimeWeeks [
+	"-1 for not resolved
+	number of full weeks"
+	closedAt ifNil: [^-1].
+	^(closedAt - createdAt) days // 7
 ]
 
 { #category : 'accessing' }

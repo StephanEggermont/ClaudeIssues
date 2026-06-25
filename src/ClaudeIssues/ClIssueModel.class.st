@@ -49,6 +49,7 @@ ClIssueModel >> read [
 			closedAt:  closed;
 			number: (rawIssue at: #number);
 			title: (rawIssue at: #title);
+			comments: (rawIssue at: #comments);
 			data: rawIssue;
 			yourself.
 		(rawIssue at: #labels) do: [:label |
