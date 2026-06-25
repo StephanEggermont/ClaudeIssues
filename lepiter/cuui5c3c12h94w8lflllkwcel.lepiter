@@ -108,6 +108,40 @@
 					"uidString" : "F6ZVHVriRPaGExrgoS1w1Q=="
 				},
 				"code" : "presentation := CIPresentation new.\rpresentation model: model.\rpresentation fill"
+			},
+			{
+				"__type" : "pharoSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2026-06-25T18:42:03.77106+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2026-06-25T18:46:21.825071+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "Etgz6l+qTjasR2DA+6/7Xw=="
+				},
+				"code" : "view := GtMondrian new.\rview nodes\n\tstencil: [ :month | \n\t\tGtMondrianUMLClassElement withDefaultContainer \r\t\t\tlabel: (month label);\n\t\t\tborder: (BlBorder \r\t\t\t\tpaint: (Color black alpha: 0.5) width: 1)];\n      with: presentation times;\r      forEach: [ :month |\r      \tview nodes\r      \t\tstencil: [ :issues |\r      \t\t\tBlElement new\r      \t\t\t\theight: issues issueGroups size sqrt;\r      \t\t\t\twidth: issues issueGroups size sqrt;\r      \t\t\t\tmargin: (BlInsets all: 1);\r      \t\t\t\tbackground: Color blue ];\r      \t\twith: (month issueGroups) .\r      \t\tview layout grid].\nview layout grid.\rview"
 			}
 		]
 	},

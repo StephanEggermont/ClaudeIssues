@@ -17,7 +17,8 @@ CIPresentation >> addIssue: issue [
 	group := times at: month ifAbsentPut: [CILabeledIssueGroup new label: month].
 	resolution := issue resolutionTimeWeeks.
 	resolutionGroup := group issueGroups at: resolution ifAbsentPut: (CILabeledIssueGroupLeaf new label: resolution).
-	resolutionGroup issueGroups add: issue
+	resolutionGroup issueGroups add: issue.
+	issue calculateInactiveClosed.
 ]
 
 { #category : 'as yet unclassified' }

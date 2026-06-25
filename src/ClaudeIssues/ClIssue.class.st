@@ -8,7 +8,8 @@ Class {
 		'title',
 		'closedAt',
 		'labels',
-		'comments'
+		'comments',
+		'inactiveClosed'
 	],
 	#category : 'ClaudeIssues-Model',
 	#package : 'ClaudeIssues',
@@ -18,6 +19,35 @@ Class {
 { #category : 'as yet unclassified' }
 ClIssue >> addLabel: aLabel [
 	labels add: aLabel
+]
+
+{ #category : 'as yet unclassified' }
+ClIssue >> calculateInactiveClosed [
+	| last|
+	inactiveClosed := false.
+	closedAt ifNil: [^false].
+	comments ifNil: [^false].
+	comments ifEmpty: [^false].
+	(comments size = 1) ifTrue: [ |txt|
+		txt := (comments first at: #body).
+		(txt beginsWith: 'Closing for now') ifTrue: [
+			^inactiveClosed := true].
+		(txt beginsWith: 'This issue has been automatically closed') ifTrue: [
+				^inactiveClosed := true].
+				^false].
+	last := comments last at: #body.
+	(last beginsWith: 'Closing for now') ifTrue: [
+		^inactiveClosed := true].
+	(last beginsWith: 'This issue has been automatically closed') ifTrue: [
+		^inactiveClosed := true].
+	(last beginsWith:'This issue has been automatically locked') ifTrue: [ |txt|
+		txt := (comments at: (comments size -1)) at: #body.
+		(txt beginsWith: 'Closing for now') ifTrue: [
+			^inactiveClosed := true].
+		(txt beginsWith: 'This issue has been automatically closed') ifTrue: [
+				^inactiveClosed := true]].
+	^inactiveClosed
+
 ]
 
 { #category : 'accessing' }
@@ -63,6 +93,16 @@ ClIssue >> data [
 { #category : 'accessing' }
 ClIssue >> data: anObject [
 	data := anObject
+]
+
+{ #category : 'accessing' }
+ClIssue >> inactiveClosed [
+	^ inactiveClosed
+]
+
+{ #category : 'accessing' }
+ClIssue >> inactiveClosed: anObject [
+	^ inactiveClosed := anObject
 ]
 
 { #category : 'as yet unclassified' }
