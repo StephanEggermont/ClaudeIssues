@@ -12,7 +12,7 @@ Class {
 
 { #category : 'as yet unclassified' }
 CILabeledIssueGroupLeaf >> inactiveClosed [
-	^issueGroups sum: [:issue | issue inactiveClosed]
+	^issueGroups count: [:issue | issue inactiveClosed]
 ]
 
 { #category : 'as yet unclassified' }

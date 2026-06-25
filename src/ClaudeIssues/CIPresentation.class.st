@@ -33,6 +33,37 @@ CIPresentation >> fill [
 ]
 
 { #category : 'as yet unclassified' }
+CIPresentation >> gtInactiveTimeOn: aView [
+	<gtView>
+	^ aView mondrian
+		title: 'Inactive ResolvedTime';
+		priority: 70;
+		painting: [ :aMondrian | 
+			aMondrian nodes
+			stencil: [ :month | 
+				GtMondrianUMLClassElement withDefaultContainer 
+					label: (month label);
+					border: (BlBorder 
+						paint: (Color black alpha: 0.5) width: 1)];
+		      with: self times;
+		      forEach: [ :month |
+		      	aMondrian nodes
+		      		stencil: [ :resolvedGroup |
+		      			BlElement new
+		      				height: (resolvedGroup inactiveClosed) sqrt;
+		      				width: (resolvedGroup inactiveClosed) sqrt;
+		      				margin: (BlInsets all: 1);
+		      				background: ((resolvedGroup label = -1) ifTrue: [
+		      					Color blue ]
+		      				ifFalse: [
+		      					Color green])];
+		      		with: (month issueGroups) .
+		      		aMondrian layout grid].
+		aMondrian layout grid.
+		aMondrian]
+]
+
+{ #category : 'as yet unclassified' }
 CIPresentation >> gtResolveTimeOn: aView [
 	<gtView>
 	^ aView mondrian
@@ -52,6 +83,37 @@ CIPresentation >> gtResolveTimeOn: aView [
 		      			BlElement new
 		      				height: resolvedGroup issueGroups size sqrt;
 		      				width: resolvedGroup issueGroups size sqrt;
+		      				margin: (BlInsets all: 1);
+		      				background: ((resolvedGroup label = -1) ifTrue: [
+		      					Color blue ]
+		      				ifFalse: [
+		      					Color green])];
+		      		with: (month issueGroups) .
+		      		aMondrian layout grid].
+		aMondrian layout grid.
+		aMondrian]
+]
+
+{ #category : 'as yet unclassified' }
+CIPresentation >> gtResolvedActiveTimeOn: aView [
+	<gtView>
+	^ aView mondrian
+		title: 'Active ResolvedTime';
+		priority: 60;
+		painting: [ :aMondrian | 
+			aMondrian nodes
+			stencil: [ :month | 
+				GtMondrianUMLClassElement withDefaultContainer 
+					label: (month label);
+					border: (BlBorder 
+						paint: (Color black alpha: 0.5) width: 1)];
+		      with: self times;
+		      forEach: [ :month |
+		      	aMondrian nodes
+		      		stencil: [ :resolvedGroup |
+		      			BlElement new
+		      				height: (resolvedGroup issueGroups size - resolvedGroup inactiveClosed) sqrt;
+		      				width: (resolvedGroup issueGroups size - resolvedGroup inactiveClosed) sqrt;
 		      				margin: (BlInsets all: 1);
 		      				background: ((resolvedGroup label = -1) ifTrue: [
 		      					Color blue ]
