@@ -33,6 +33,37 @@ CIPresentation >> fill [
 ]
 
 { #category : 'as yet unclassified' }
+CIPresentation >> gtResolveTimeOn: aView [
+	<gtView>
+	^ aView mondrian
+		title: 'ResolveTime';
+		priority: 50;
+		painting: [ :aMondrian | 
+			aMondrian nodes
+			stencil: [ :month | 
+				GtMondrianUMLClassElement withDefaultContainer 
+					label: (month label);
+					border: (BlBorder 
+						paint: (Color black alpha: 0.5) width: 1)];
+		      with: self times;
+		      forEach: [ :month |
+		      	aMondrian nodes
+		      		stencil: [ :resolvedGroup |
+		      			BlElement new
+		      				height: resolvedGroup issueGroups size sqrt;
+		      				width: resolvedGroup issueGroups size sqrt;
+		      				margin: (BlInsets all: 1);
+		      				background: ((resolvedGroup label = -1) ifTrue: [
+		      					Color blue ]
+		      				ifFalse: [
+		      					Color green])];
+		      		with: (month issueGroups) .
+		      		aMondrian layout grid].
+		aMondrian layout grid.
+		aMondrian]
+]
+
+{ #category : 'as yet unclassified' }
 CIPresentation >> initialize [
 	times := OrderedDictionary new
 ]

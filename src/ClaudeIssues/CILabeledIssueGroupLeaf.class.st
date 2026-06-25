@@ -11,6 +11,11 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
+CILabeledIssueGroupLeaf >> inactiveClosed [
+	^issueGroups sum: [:issue | issue inactiveClosed]
+]
+
+{ #category : 'as yet unclassified' }
 CILabeledIssueGroupLeaf >> initialize [
 	issueGroups := OrderedCollection new
 ]

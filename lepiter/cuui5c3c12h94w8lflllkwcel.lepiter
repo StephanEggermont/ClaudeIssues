@@ -134,14 +134,14 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2026-06-25T18:46:21.825071+02:00"
+						"dateAndTimeString" : "2026-06-25T19:40:35.086592+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
 					"uidString" : "Etgz6l+qTjasR2DA+6/7Xw=="
 				},
-				"code" : "view := GtMondrian new.\rview nodes\n\tstencil: [ :month | \n\t\tGtMondrianUMLClassElement withDefaultContainer \r\t\t\tlabel: (month label);\n\t\t\tborder: (BlBorder \r\t\t\t\tpaint: (Color black alpha: 0.5) width: 1)];\n      with: presentation times;\r      forEach: [ :month |\r      \tview nodes\r      \t\tstencil: [ :issues |\r      \t\t\tBlElement new\r      \t\t\t\theight: issues issueGroups size sqrt;\r      \t\t\t\twidth: issues issueGroups size sqrt;\r      \t\t\t\tmargin: (BlInsets all: 1);\r      \t\t\t\tbackground: Color blue ];\r      \t\twith: (month issueGroups) .\r      \t\tview layout grid].\nview layout grid.\rview"
+				"code" : "view := GtMondrian new.\rview nodes\n\tstencil: [ :month | \n\t\tGtMondrianUMLClassElement withDefaultContainer \r\t\t\tlabel: (month label);\n\t\t\tborder: (BlBorder \r\t\t\t\tpaint: (Color black alpha: 0.5) width: 1)];\n      with: presentation times;\r      forEach: [ :month |\r      \tview nodes\r      \t\tstencil: [ :resolvedGroup |\r      \t\t\tBlElement new\r      \t\t\t\theight: resolvedGroup issueGroups size sqrt;\r      \t\t\t\twidth: resolvedGroup issueGroups size sqrt;\r      \t\t\t\tmargin: (BlInsets all: 1);\r      \t\t\t\tbackground: ((resolvedGroup label = -1) ifTrue: [\r      \t\t\t\t\tColor blue ]\r      \t\t\t\tifFalse: [\r      \t\t\t\t\tColor green])];\r      \t\twith: (month issueGroups) .\r      \t\tview layout grid].\nview layout grid.\rview"
 			}
 		]
 	},
