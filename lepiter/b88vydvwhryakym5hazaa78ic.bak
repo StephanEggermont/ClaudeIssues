@@ -66,14 +66,14 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2026-07-01T09:51:06.75594+02:00"
+						"dateAndTimeString" : "2026-07-01T09:51:05.255435+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
 					"uidString" : "QlS3SYU/QvyV+xYDXf962Q=="
 				},
-				"code" : "gh auth login\rgh issue list --repo anthropic/claude-code --state all --limit 99999 --json closedAt,comments,createdAt,labels,number,state,title,body"
+				"code" : "gh auth login\rgh issue list --repo anthropic/claude-code --state all --limit 99999 --json closedAt,comments,createdAt,labels,number,state,title,"
 			},
 			{
 				"__type" : "textSnippet",
@@ -100,7 +100,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2026-07-01T09:51:33.813504+02:00"
+						"dateAndTimeString" : "2026-06-23T13:32:16.246478+02:00"
 					}
 				},
 				"uid" : {
@@ -110,7 +110,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "A json file download from all issues of anthropic/claude. \nCollected are: issue number, state, createdAt. closedAt, labels, title, comments,body.\nHow many are there?"
+				"string" : "A json file download from all issues of anthropic/claude. \nCollected are: issue number, state, createdAt. closedAt, labels, title, comments.\nHow many are there?"
 			},
 			{
 				"__type" : "pharoSnippet",
