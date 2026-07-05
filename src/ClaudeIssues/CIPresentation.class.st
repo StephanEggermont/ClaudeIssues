@@ -53,10 +53,7 @@ CIPresentation >> gtInactiveTimeOn: aView [
 		      				height: (resolvedGroup inactiveClosed) sqrt;
 		      				width: (resolvedGroup inactiveClosed) sqrt;
 		      				margin: (BlInsets all: 1);
-		      				background: ((resolvedGroup label = -1) ifTrue: [
-		      					Color blue ]
-		      				ifFalse: [
-		      					Color green])];
+		      				background: (self timeColorFor:  resolvedGroup )];
 		      		with: (month issueGroups) .
 		      		aMondrian layout grid].
 		aMondrian layout grid.
@@ -71,27 +68,23 @@ CIPresentation >> gtResolveTimeOn: aView [
 		priority: 50;
 		painting: [ :aMondrian | 
 			aMondrian nodes
-			stencil: [ :month | 
-				GtMondrianUMLClassElement withDefaultContainer 
-					label: (month label);
-					border: (BlBorder 
-						paint: (Color black alpha: 0.5) width: 1)];
-		      with: self times;
-		      forEach: [ :month |
-		      	aMondrian nodes
-		      		stencil: [ :resolvedGroup |
-		      			BlElement new
-		      				height: resolvedGroup issueGroups size sqrt;
-		      				width: resolvedGroup issueGroups size sqrt;
-		      				margin: (BlInsets all: 1);
-		      				background: ((resolvedGroup label = -1) ifTrue: [
-		      					Color blue ]
-		      				ifFalse: [
-		      					Color green])];
-		      		with: (month issueGroups) .
-		      		aMondrian layout grid].
-		aMondrian layout grid.
-		aMondrian]
+				stencil: [ :month | 
+					GtMondrianUMLClassElement withDefaultContainer
+						label: month label;
+						border: (BlBorder paint: (Color black alpha: 0.5) width: 1) ];
+				with: self times;
+				forEach: [ :month | 
+					aMondrian nodes
+						stencil: [ :resolvedGroup | 
+							BlElement new
+								height: resolvedGroup issueGroups size sqrt;
+								width: resolvedGroup issueGroups size sqrt;
+								margin: (BlInsets all: 1);
+								background: (self timeColorFor: resolvedGroup) ];
+						with: month issueGroups.
+					aMondrian layout grid ].
+			aMondrian layout grid.
+			aMondrian ]
 ]
 
 { #category : 'as yet unclassified' }
@@ -115,10 +108,7 @@ CIPresentation >> gtResolvedActiveTimeOn: aView [
 		      				height: (resolvedGroup issueGroups size - resolvedGroup inactiveClosed) sqrt;
 		      				width: (resolvedGroup issueGroups size - resolvedGroup inactiveClosed) sqrt;
 		      				margin: (BlInsets all: 1);
-		      				background: ((resolvedGroup label = -1) ifTrue: [
-		      					Color blue ]
-		      				ifFalse: [
-		      					Color green])];
+		      				background: (self timeColorFor:  resolvedGroup )];
 		      		with: (month issueGroups) .
 		      		aMondrian layout grid].
 		aMondrian layout grid.
@@ -138,6 +128,17 @@ CIPresentation >> model [
 { #category : 'accessing' }
 CIPresentation >> model: anObject [
 	model := anObject
+]
+
+{ #category : 'as yet unclassified' }
+CIPresentation >> timeColorFor: resolvedGroup [
+	|nrOfWeeks|
+	nrOfWeeks := resolvedGroup label.
+	nrOfWeeks = -1 ifTrue: [ ^Color blue ].
+	nrOfWeeks <= 4 ifTrue: [ ^Color green ].
+	nrOfWeeks <= 12 ifTrue: [ ^Color yellow ].
+	nrOfWeeks <= 52 ifTrue: [ ^Color orange ].
+	^Color red .
 ]
 
 { #category : 'accessing' }

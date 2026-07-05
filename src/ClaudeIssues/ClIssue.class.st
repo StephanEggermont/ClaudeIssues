@@ -9,7 +9,8 @@ Class {
 		'closedAt',
 		'labels',
 		'comments',
-		'inactiveClosed'
+		'inactiveClosed',
+		'body'
 	],
 	#category : 'ClaudeIssues-Model',
 	#package : 'ClaudeIssues',
@@ -19,6 +20,16 @@ Class {
 { #category : 'as yet unclassified' }
 ClIssue >> addLabel: aLabel [
 	labels add: aLabel
+]
+
+{ #category : 'accessing' }
+ClIssue >> body [
+	^ body
+]
+
+{ #category : 'accessing' }
+ClIssue >> body: anObject [
+	body := anObject
 ]
 
 { #category : 'as yet unclassified' }

@@ -50,6 +50,7 @@ ClIssueModel >> read [
 			number: (rawIssue at: #number);
 			title: (rawIssue at: #title);
 			comments: (rawIssue at: #comments);
+			body: (rawIssue at: #body ifAbsentPut:['']);
 			data: rawIssue;
 			yourself.
 		(rawIssue at: #labels) do: [:label |
