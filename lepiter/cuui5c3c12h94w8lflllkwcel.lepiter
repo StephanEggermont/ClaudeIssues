@@ -66,14 +66,14 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2026-06-24T12:31:15.581808+02:00"
+						"dateAndTimeString" : "2026-07-05T14:12:22.667405+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
 					"uidString" : "wc7uVSaXQjGUWNuMECnb9Q=="
 				},
-				"code" : "model := ClIssueModel new.\rmodel root: FileLocator home / 'issues.json'.\rmodel read"
+				"code" : "model := ClIssueModel new.\rmodel root: FileLocator home / 'Sensus/claudeIssues/issues2.json'.\rmodel read"
 			},
 			{
 				"__type" : "pharoSnippet",

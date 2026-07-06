@@ -106,6 +106,36 @@ ClIssue >> data: anObject [
 	data := anObject
 ]
 
+{ #category : 'as yet unclassified' }
+ClIssue >> gtOverviewOn: aView [
+	<gtView>
+	^ aView mondrian
+		title: 'Overview';
+		priority: 10;
+		painting: [ :aMondrian | 
+			aMondrian nodes
+			stencil: [ :issue | 
+				GtMondrianUMLClassElement withDefaultContainer 
+					label: (issue title);
+					border: (BlBorder 
+						paint: (Color black alpha: 0.5) width: 1)];
+		      with: {self} ;
+		      forEach: [ :issue |
+		      	aMondrian nodes
+		      		stencil: [ :comment |
+								BrEditorElement new 
+									constraintsDo: [ :c | 
+										c horizontal fitContent.
+										c vertical fitContent];
+									editor: (BrTextEditorModel new 
+									text: ((comment at: #body) withInternalLineEndings asRopedText light fontSize: 11))
+									];
+		      		with: (issue comments) .
+		      		aMondrian layout grid].
+		aMondrian layout grid.
+		aMondrian]
+]
+
 { #category : 'accessing' }
 ClIssue >> inactiveClosed [
 	^ inactiveClosed
