@@ -39,3 +39,14 @@ CILabeledIssueGroupLeaf >> label [
 CILabeledIssueGroupLeaf >> label: anObject [
 	label := anObject
 ]
+
+{ #category : 'as yet unclassified' }
+CILabeledIssueGroupLeaf >> timeColorFor: resolvedGroup [
+	|nrOfWeeks|
+	nrOfWeeks := label.
+	nrOfWeeks = -1 ifTrue: [ ^Color blue ].
+	nrOfWeeks <= 4 ifTrue: [ ^Color green ].
+	nrOfWeeks <= 12 ifTrue: [ ^Color yellow ].
+	nrOfWeeks <= 52 ifTrue: [ ^Color orange ].
+	^Color red .
+]

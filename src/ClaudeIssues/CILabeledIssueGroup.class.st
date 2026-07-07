@@ -14,7 +14,7 @@ Class {
 CILabeledIssueGroup >> gtResolveTimeOn: aView [
 	<gtView>
 	^ aView mondrian
-		title: 'ResolveTime';
+		title: 'ResolveTime ',self label asString;
 		priority: 10;
 		painting: [ :aMondrian | 
 			aMondrian nodes
@@ -31,10 +31,7 @@ CILabeledIssueGroup >> gtResolveTimeOn: aView [
 		      				height: issue comments size ;
 		      				width: issue comments size ;
 		      				margin: (BlInsets all: 1);
-		      				background: (issue closedAt  ifNil: [
-		      					Color blue ]
-		      				ifNotNil: [
-		      					Color green])];
+		      				background: (self timeColorFor: issue)];
 		      		with: (week issueGroups) .
 		      		aMondrian layout grid].
 		aMondrian layout grid.
@@ -64,4 +61,15 @@ CILabeledIssueGroup >> label [
 { #category : 'accessing' }
 CILabeledIssueGroup >> label: anObject [
 	label := anObject
+]
+
+{ #category : 'as yet unclassified' }
+CILabeledIssueGroup >> timeColorFor: issue [
+	|nrOfWeeks|
+	nrOfWeeks := issue resolutionTimeWeeks.
+	nrOfWeeks = -1 ifTrue: [ ^Color blue ].
+	nrOfWeeks <= 4 ifTrue: [ ^Color green ].
+	nrOfWeeks <= 12 ifTrue: [ ^Color yellow ].
+	nrOfWeeks <= 52 ifTrue: [ ^Color orange ].
+	^Color red .
 ]
